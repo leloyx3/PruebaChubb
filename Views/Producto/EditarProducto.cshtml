@@ -44,7 +44,7 @@
                                     <option value="" disabled>Seleccione..</option>
                                     @foreach (var item in Model.Ubicaciones)
                                     {
-                                        if (Model.Ubicaciones.FirstOrDefault(x => x.Id == Model.Producto.Ubicacion) != null)
+                                        if (item.Id == Model.Producto.Ubicacion)
                                         {
                                             <option value="@item.Id" selected>@item.Descripcion</option>
                                         }

@@ -17,5 +17,6 @@ namespace ChTestPro.Models.DbTable
         public bool Estado { get; set; }
         public DateTime FechaCreacion { get; set; }
         public DateTime FechaModificacion { get; set; }
+        public Ubicacion Ubicaciones { get; set; }
     }
 }

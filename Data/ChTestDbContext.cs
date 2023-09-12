@@ -1,6 +1,7 @@
 ﻿using ChTestPro.Models.DbTable;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Reflection.Metadata;
 
 namespace ChTestPro.Data
 {
@@ -9,6 +10,14 @@ namespace ChTestPro.Data
         public ChTestDbContext(DbContextOptions<ChTestDbContext> options)
             : base(options)
         {
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Producto>()
+                .HasOne(e => e.Ubicaciones)
+                .WithOne(e => e.Productos)
+                .HasForeignKey<Ubicacion>(e => e.Id);
         }
 
         public virtual DbSet<Usuario> Usuarios { get; set; }

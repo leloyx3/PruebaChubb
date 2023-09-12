@@ -51,13 +51,10 @@ namespace ChTestPro.Controllers
             {
                 var dataProduct = _chTestDbContext.Productos
                 .AsNoTracking()
+                .Include(z => z.Ubicaciones)
                 .Where(x => x.Estado)
                 .ToList()
                 .OrderBy(x => x.Id);
-
-                var dataUbicacionModel = _chTestDbContext.Ubicacion
-                    .AsNoTracking()
-                    .ToList();
 
                 dataTable = new DataTable();
                 dataTable.Columns.Add("ID", typeof(int));
@@ -73,7 +70,7 @@ namespace ChTestPro.Controllers
                     dataTable.Rows.Add(
                         item.Id,
                         item.NombreProducto,
-                        dataUbicacionModel.FirstOrDefault(x => x.Id == item.Ubicacion).Descripcion,
+                        item.Ubicaciones.Descripcion,
                         item.PrecioDetal,
                         item.PrecioMayor,
                         item.Existencias
