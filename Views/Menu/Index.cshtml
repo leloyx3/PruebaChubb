@@ -1,0 +1,62 @@
+﻿@model ChTestPro.Models.DataTableViewModel
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Menu Page";
+}
+
+<section class="h-100">
+    <div class="container h-100">
+        <div class="justify-content-sm-center h-100">
+            <div class="text-center mt-5">
+            </div>
+            <br />
+            <br />
+            <div class="card shadow-lg">
+                <div class="card-header">
+                    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                        <div class="container-md d-flex justify-content-start">
+                            <a class="btn btn-outline-dark m-2" asp-controller="Menu" asp-action="Index">Inicio</a>
+                            <a class="btn btn-outline-primary" asp-controller="Producto" asp-action="RegistrarProducto">Registrar Producto</a>
+                        </div>
+                        <div class="container-md d-flex justify-content-end">
+                            <a class="btn btn-outline-danger" asp-controller="Home" asp-action="LogOut">Cerrar Sesión</a>
+                        </div>
+                    </nav>
+                </div>
+                <div class="card-body p-5">
+                    <h3 class="text-center">¡Bienvenido! - @Context.User.Claims.FirstOrDefault().Value</h3>
+                    <br />
+                    <table id="example" class="table table-striped">
+                        <thead>
+                            <tr>
+                                @foreach (System.Data.DataColumn column in Model.DataTable.Columns)
+                                {
+                                    <th>@column.ColumnName</th>
+                                }
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (System.Data.DataRow row in Model.DataTable.Rows)
+                            {
+                                <tr>
+                                    <td>@row["ID"]</td>
+                                    <td>@row["NombreProducto"]</td>
+                                    <td>@row["Ubicacion"]</td>
+                                    <td>@row["PrecioDetal"]</td>
+                                    <td>@row["PrecioMayor"]</td>
+                                    <td>@row["Existencias"]</td>
+                                    <td>
+                                        <a href="@Url.Action("EditarProducto", "Producto", new { Id = row["ID"] })" class="btn btn-primary btn-sm">Editar</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

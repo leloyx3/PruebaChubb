@@ -1,0 +1,118 @@
+﻿@model ChTestPro.Models.EditProductViewModel
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Edit Product Page";
+}
+
+<section class="h-100">
+    <div class="container h-100">
+        <div class="justify-content-sm-center h-100">
+            <div class="text-center mt-5">
+            </div>
+            <br />
+            <br />
+            <div class="card shadow-lg">
+                <div class="card-header">
+                    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                        <div class="container-md d-flex justify-content-start">
+                            <a class="btn btn-outline-dark m-2" asp-controller="Menu" asp-action="Index">Inicio</a>
+                            <a class="btn btn-outline-primary" asp-controller="Producto" asp-action="RegistrarProducto">Registrar Producto</a>
+                        </div>
+                        <div class="container-md d-flex justify-content-end">
+                            <a class="btn btn-outline-danger" asp-controller="Home" asp-action="LogOut">Cerrar Sesión</a>
+                        </div>
+                    </nav>
+                </div>
+                <div class="card-body p-5">
+                    <h3 class="text-center">¡Edición del Producto - @Model.Producto.NombreProducto!</h3>
+                    <br />
+                    <form method="POST" asp-controller="Producto" asp-action="EditarProducto">
+
+                        <input id="Id" type="hidden" name="Id" value="@Model.Producto.Id" />
+
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label class="text-muted" for="NombreProducto">Nombre Producto</label>
+                                <input id="NombreProducto" type="text" class="form-control" name="NombreProducto" value="@Model.Producto.NombreProducto" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="text-muted" for="Ubicacion">Ubicacion</label>
+                                <select id="Ubicacion" class="form-control" name="Ubicacion" required>
+                                    <option value="" disabled>Seleccione..</option>
+                                    @foreach (var item in Model.Ubicaciones)
+                                    {
+                                        if (Model.Ubicaciones.FirstOrDefault(x => x.Id == Model.Producto.Ubicacion) != null)
+                                        {
+                                            <option value="@item.Id" selected>@item.Descripcion</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@item.Id">@item.Descripcion</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+
+                        <br />
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label class="text-muted" for="PrecioDetal">Precio Detal</label>
+                                <input id="PrecioDetal" type="text" class="form-control" name="PrecioDetal" value="@Model.Producto.PrecioDetal" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="text-muted" for="PrecioMayor">Precio Mayor</label>
+                                <input id="PrecioMayor" type="text" class="form-control" name="PrecioMayor" value="@Model.Producto.PrecioMayor" required>
+                            </div>
+                        </div>
+
+                        <br />
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label class="text-muted" for="Existencias">Existencias</label>
+                                <input id="Existencias" type="number" min="0" class="form-control" name="Existencias" value="@Model.Producto.Existencias" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="text-muted" for="Estado">Estado</label>
+                                <select id="Estado" class="form-control" name="Estado" required>
+                                    @if (Model.Producto.Estado)
+                                    {
+                                        <option value="1" selected>Activo</option>
+                                        <option value="0">Inactivo</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="1">Activo</option>
+                                        <option value="0" selected>Inactivo</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+
+                        <br />
+                        <div class="text-danger">
+                            @Html.ValidationSummary()
+                        </div>
+
+                        <br />
+                        <div class="d-flex align-items-center">
+                            <div class="m-1">
+                                <a class="btn btn-danger" asp-controller="Menu" asp-action="Index">
+                                    Atrás
+                                </a>
+                            </div>
+                            <div class="m-1">
+                                <button type="submit" class="btn btn-primary">
+                                    Actualizar
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
