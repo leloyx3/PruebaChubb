@@ -10,7 +10,7 @@ namespace ChTestPro.Models.DbTable
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }
         public string? NombreProducto { get; set; }
-        public int Ubicacion { get; set; }
+        public long Ubicacion { get; set; }
         public string? PrecioDetal { get; set; }
         public string? PrecioMayor { get; set; }
         public int Existencias { get; set; }

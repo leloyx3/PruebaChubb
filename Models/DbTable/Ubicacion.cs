@@ -12,6 +12,6 @@ namespace ChTestPro.Models.DbTable
         public string? Descripcion { get; set; }
         public int NumeroPosiciones { get; set; }
         public int CapacidadMaxima { get; set; }
-        public Producto Productos { get; set; }
+        public List<Producto> Productos { get; set; }
     }
 }

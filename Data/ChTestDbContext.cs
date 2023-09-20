@@ -16,8 +16,9 @@ namespace ChTestPro.Data
         {
             modelBuilder.Entity<Producto>()
                 .HasOne(e => e.Ubicaciones)
-                .WithOne(e => e.Productos)
-                .HasForeignKey<Ubicacion>(e => e.Id);
+                .WithMany(e => e.Productos)
+                .HasForeignKey(e => e.Ubicacion)
+                .IsRequired();
         }
 
         public virtual DbSet<Usuario> Usuarios { get; set; }
