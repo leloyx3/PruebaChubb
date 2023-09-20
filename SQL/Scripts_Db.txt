@@ -133,7 +133,7 @@ GO
 CREATE TABLE [dbo].[Producto](
 	[Id] [bigint] IDENTITY(1,1) NOT NULL,
 	[NombreProducto] [nvarchar](50) NULL,
-	[Ubicacion] [int] NULL,
+	[Ubicacion] [bigint] NULL,
 	[PrecioDetal] [nvarchar](50) NULL,
 	[PrecioMayor] [nvarchar](50) NULL,
 	[Existencias] [int] NULL,
